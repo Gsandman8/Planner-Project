@@ -3,8 +3,6 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(document).ready(function () {
-const saveBtns = $(".saveBtn");
-console.log(saveBtns);
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -12,17 +10,14 @@ console.log(saveBtns);
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   let saveData = {};
-  for(const btn of saveBtns){ 
-    console.log(btn);
-    btn.addEventListener("click", function(event){
-      event.preventDefault();
+  $(".time-block").children("button").each(function(){
+    $(this).on("click", function(){
       const text = $(this).siblings("textarea").val();
       const id = $(this).parent().attr("id");
       saveData[id] = text;
       localStorage.setItem("saveData", JSON.stringify(saveData));
-    
     });
-
+  });
   //
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
@@ -47,6 +42,7 @@ console.log(saveBtns);
   //
   $(".time-block").each(function(){
     const data = JSON.parse(localStorage.getItem("saveData"));
+    console.log(data);
     if(data[$(this).attr("id")]){
       $(this).children("textarea").text(data[$(this).attr("id")]);
     }
@@ -61,7 +57,6 @@ console.log(saveBtns);
     const currentTime = dayjs().format("h:mm:ss A");
     $("#currentTime").text(currentTime);
   }, 1000);
-  
+}); 
 
-}
-});
+

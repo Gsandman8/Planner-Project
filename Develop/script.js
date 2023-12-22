@@ -24,7 +24,9 @@ $(document).ready(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
-  //
+
+
+  //Needed change time-block divs to 24 hour time ids
   $(".time-block").each(function(){
     if(dayjs().get("hour") > $(this).attr("id")){
       $(this).removeClass("present future").addClass("past");
@@ -42,7 +44,7 @@ $(document).ready(function () {
   //
   $(".time-block").each(function(){
     const data = JSON.parse(localStorage.getItem("saveData"));
-    console.log(data);
+    //Checks if data exists, does nothing if undefined
     if(data[$(this).attr("id")]){
       $(this).children("textarea").text(data[$(this).attr("id")]);
     }
@@ -52,7 +54,7 @@ $(document).ready(function () {
   //For day
   const currentDay = dayjs().format("dddd, MMMM D");
   $("#currentDay").text(currentDay);
-  //For time
+  //For time, updates every second
   setInterval(function(){
     const currentTime = dayjs().format("h:mm:ss A");
     $("#currentTime").text(currentTime);

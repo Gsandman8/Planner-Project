@@ -15,12 +15,10 @@ console.log(saveBtns);
   for(const btn of saveBtns){ 
     console.log(btn);
     btn.addEventListener("click", function(event){
-    
-      console.log(event.target.closest("div").id);
-      console.log(event.target.parentElement);
-      console.log(event.target);
-      saveData[event.target.closest("div").id] = event.target.parentElement.closest("textarea").text;
-      //console.losaveDatag(saveData);
+      event.preventDefault();
+      const text = $(this).siblings("textarea").val();
+      const id = $(this).parent().attr("id");
+      saveData[id] = text;
       localStorage.setItem("saveData", JSON.stringify(saveData));
     
     });
@@ -47,6 +45,12 @@ console.log(saveBtns);
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
+  $(".time-block").each(function(){
+    const data = JSON.parse(localStorage.getItem("saveData"));
+    if(data[$(this).attr("id")]){
+      $(this).children("textarea").text(data[$(this).attr("id")]);
+    }
+  });
 
   // TODO: Add code to display the current date in the header of the page.
   //For day

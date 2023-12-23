@@ -44,11 +44,8 @@ $(document).ready(function () {
   //
   $(".time-block").each(function(){
     const data = JSON.parse(localStorage.getItem("saveData"));
-    console.log(this);
-    //Checks if data exists, does nothing if undefined
-    if(data[$(this).attr("id")]){
-      $(this).children("textarea").text(data[$(this).attr("id")]);
-    }
+    $(this).children("textarea").text(data[$(this).attr("id")]);
+    
   });
 
   // TODO: Add code to display the current date in the header of the page.

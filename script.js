@@ -9,7 +9,7 @@ $(document).ready(function () {
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
-  let saveData = {};
+  let saveData = JSON.parse(localStorage.getItem("saveData"));
   $(".time-block").children("button").each(function(){
     $(this).on("click", function(){
       const text = $(this).siblings("textarea").val();
@@ -44,8 +44,9 @@ $(document).ready(function () {
   //
   $(".time-block").each(function(){
     const data = JSON.parse(localStorage.getItem("saveData"));
+    console.log(this);
     //Checks if data exists, does nothing if undefined
-    if(data[parseInt($(this).attr("id"))]){
+    if(data[$(this).attr("id")]){
       $(this).children("textarea").text(data[$(this).attr("id")]);
     }
   });

@@ -45,7 +45,7 @@ $(document).ready(function () {
   $(".time-block").each(function(){
     const data = JSON.parse(localStorage.getItem("saveData"));
     //Checks if data exists, does nothing if undefined
-    if(data[$(this).attr("id")]){
+    if(data[parseInt($(this).attr("id"))]){
       $(this).children("textarea").text(data[$(this).attr("id")]);
     }
   });

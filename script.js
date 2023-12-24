@@ -8,8 +8,8 @@ $(document).ready(function () {
   // local storage. HINT: What does `this` reference in the click listener
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  let saveData = JSON.parse(localStorage.getItem("saveData")) !== null? JSON.parse(localStorage.getItem("saveData")) : {};
+  // useful when saving the description in local storage?\
+  let saveData = JSON.parse(localStorage.getItem("saveData")) === null? {} : JSON.parse(localStorage.getItem("saveData"));
   $(".time-block").children("button").each(function(){
     $(this).on("click", function(){
       const text = $(this).siblings("textarea").val();
@@ -43,8 +43,7 @@ $(document).ready(function () {
   // attribute of each time-block be used to do this?
   //
   $(".time-block").each(function(){
-    const data = JSON.parse(localStorage.getItem("saveData"));
-    $(this).children("textarea").text(data[$(this).attr("id")]);
+    $(this).children("textarea").text(saveData[$(this).attr("id")]);
     
   });
 
